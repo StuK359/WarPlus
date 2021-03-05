@@ -1,0 +1,53 @@
+states:
+deck Class
+  - cardsNum
+  - deckCategory (cardsUnplayed, cardsWon)
+player Class
+  - player1CardsRemaining, player1WinPile
+  - player2CardsRemaining, player2WinPile
+
+winner
+tieQueue 
+tieWinner
+
+1. playIntroGameMusic(); 
+
+2. renderGameIntroScene();
+
+3. turnOffMusic(); 
+
+4. howToPlay() button is "available".
+
+5. Initialize() game. 
+  a) Randomize deck, 
+  b) Split into two decks, 
+  c) Assign each half to a player.
+  
+6. shuffleCards(). 
+  a) Actual card deck is randomized during initialize; this is just a visualization animation for entertaiment value.
+
+7. renderGame()
+  a) first two cards are moved to the battlefield.
+  b) call cardsCompare().
+  c) if they are equivalent {
+  d) cardsGone()? Quit();
+    d.1) Move tie cards to the left. tieQueue.push()
+    d.2) Next two cards are moved to the battlefield.
+    d.3) If too many ties to move new battleCards into normal location, push new 
+    card load to the right.
+    d.4) If a player runs out of cards during a tie, they lose.
+    d.5) Call cardsCompare().
+    
+   e) else 
+    e.1) Hightlight winning card with blinking border, moveCardsToWinnerAnimation();
+         e.1.a tieQueue.pop() until empty.
+    e.2) cardsGone()? declareWinner(), quit().
+       else
+    e.3) return renderGame();
+   
+8. quit()
+  a) renderWinnerAnimation();
+  b) playAgain()?;
+ 
+
+

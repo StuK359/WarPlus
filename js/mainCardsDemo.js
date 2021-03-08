@@ -3,7 +3,7 @@ const suits = ['s', 'c', 'd', 'h'];
 const ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
 
 const sounds = {
-  shuffle: 'sounds/shuffling-cards.mp3'
+  shuffle: './sounds/shuffling-cards.mp3'
 };
 // Build a 'master' deck of 'card' objects used to create shuffled decks
 const masterDeck = buildMasterDeck();

@@ -2,6 +2,9 @@
 const suits = ['s', 'c', 'd', 'h'];
 const ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
 
+const sounds = {
+  shuffle: 'sounds/shuffling-cards.mp3'
+};
 // Build a 'master' deck of 'card' objects used to create shuffled decks
 const masterDeck = buildMasterDeck();
 renderDeckInContainer(masterDeck, document.getElementById('master-deck-container'));
@@ -14,6 +17,7 @@ const shuffledContainer = document.getElementById('shuffled-deck-container');
 
 /*----- event listeners -----*/
 document.querySelector('button').addEventListener('click', renderShuffledDeck);
+document.querySelector('button').addEventListener('click', playshuffleSound);
 
 /*----- functions -----*/
 function renderShuffledDeck() {
@@ -27,6 +31,11 @@ function renderShuffledDeck() {
     shuffledDeck.push(tempDeck.splice(rndIdx, 1)[0]);
   }
   renderDeckInContainer(shuffledDeck, shuffledContainer);
+}
+
+function playShuffleSound() {
+  player.src = sounds['shuffle'];
+  player.play();
 }
 
 function renderDeckInContainer(deck, container) {
@@ -55,4 +64,3 @@ function buildMasterDeck() {
   return deck;
 }
 
-renderShuffledDeck();

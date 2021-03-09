@@ -1,4 +1,5 @@
 /*----- constants -----*/
+const STARTUP_SOUND1_DELAY = 3000;
 const cardDeck;
 
 /*----- app's state (variables) -----*/
@@ -120,5 +121,7 @@ function movePlayer2WinPileToAmmoPile() {
     console.log("\nPlayer 2 ran out of cards! Move his Win pile over to his Ammo pile. ");
 };
 
-
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms || DEF_DELAY));
+};
 

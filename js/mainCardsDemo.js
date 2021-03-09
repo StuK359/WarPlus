@@ -1,6 +1,9 @@
 /*----- constants -----*/
 const suits = ['s', 'c', 'd', 'h'];
 const ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
+const SOUND_DELAY = 3000;
+const APPLAUSE_DELAY = 1500;
+const DEFAULT_DELAY = 1000;
 
 const sounds = {
   shuffle: './sounds/shuffling-cards.mp3'
@@ -11,15 +14,27 @@ renderDeckInContainer(masterDeck, document.getElementById('master-deck-container
 
 /*----- app's state (variables) -----*/
 let shuffledDeck;
+var startupSound = document.getElementById("startup-sound");
+
+
 
 /*----- cached element references -----*/
 const shuffledContainer = document.getElementById('shuffled-deck-container');
 
 /*----- event listeners -----*/
 document.querySelector('button').addEventListener('click', renderShuffledDeck);
-document.querySelector('button').addEventListener('click', playshuffleSound);
+document.getElementById('startup-sound').addEventListener('load', playStartupSound);
+/* document.querySelector('button').addEventListener('click', playshuffleSound);
 
 /*----- functions -----*/
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms || DEFAULT_DELAY));
+};
+
+function playStartupSound() {
+   startupSound.play(); //play the audio file
+};
+
 function renderShuffledDeck() {
   // Create a copy of the masterDeck (leave masterDeck untouched!)
   const tempDeck = [...masterDeck];
@@ -30,13 +45,29 @@ function renderShuffledDeck() {
     // Note the [0] after splice - this is because splice always returns an array and we just want the card object in that array
     shuffledDeck.push(tempDeck.splice(rndIdx, 1)[0]);
   }
+  playShuffleSound();
   renderDeckInContainer(shuffledDeck, shuffledContainer);
-}
+  setTimeout(() => {playApplause(); }, APPLAUSE_DELAY); 
+};
 
 function playShuffleSound() {
-  player.src = sounds['shuffle'];
-  player.play();
-}
+    var audio = new Audio('sounds/shuffling.mp3');
+    audio.loop = false;
+    audio.play(); 
+};
+
+function playApplause() {
+  var audio2 = new Audio('sounds/player2cheer.mp3');
+  audio2.loop = false;
+  audio2.play(); 
+};
+
+// Old approach, didn't work.
+// function playStartupSound() {
+//   var audio3 = new Audio('sounds/launchswell0.mp3');
+//   audio3.loop = false;
+//   audio3.play(); 
+// };
 
 function renderDeckInContainer(deck, container) {
   container.innerHTML = '';
@@ -46,7 +77,7 @@ function renderDeckInContainer(deck, container) {
     return html + `<div class="card ${card.face}"></div>`;
   }, '');
   container.innerHTML = cardsHtml;
-}
+};
 
 function buildMasterDeck() {
   const deck = [];
@@ -63,4 +94,6 @@ function buildMasterDeck() {
   });
   return deck;
 }
+
+
 

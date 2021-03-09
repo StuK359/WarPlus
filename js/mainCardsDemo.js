@@ -6,8 +6,9 @@ const APPLAUSE_DELAY = 1500;
 const DEFAULT_DELAY = 1000;
 
 const sounds = {
-  shuffle: './sounds/shuffling-cards.mp3'
+  shuffle: 'sounds/shuffling.mp3'
 };
+
 // Build a 'master' deck of 'card' objects used to create shuffled decks
 const masterDeck = buildMasterDeck();
 renderDeckInContainer(masterDeck, document.getElementById('master-deck-container'));
@@ -20,19 +21,19 @@ var startupSound = document.getElementById("startup-sound");
 
 /*----- cached element references -----*/
 const shuffledContainer = document.getElementById('shuffled-deck-container');
+const startupSound = document.getElementById('startup-sound');
 
 /*----- event listeners -----*/
 document.querySelector('button').addEventListener('click', renderShuffledDeck);
-document.getElementById('startup-sound').addEventListener('load', playStartupSound);
-/* document.querySelector('button').addEventListener('click', playshuffleSound);
+document.querySelector('startup-sound').addEventListener('load', playStartupSound);
 
 /*----- functions -----*/
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms || DEFAULT_DELAY));
-};
+// function sleep(ms) {
+//   return new Promise(resolve => setTimeout(resolve, ms || DEFAULT_DELAY));
+// };
 
-function playStartupSound() {
-   startupSound.play(); //play the audio file
+ function playStartupSound() {
+    startupSound.play(); //play the audio file
 };
 
 function renderShuffledDeck() {
@@ -47,27 +48,29 @@ function renderShuffledDeck() {
   }
   playShuffleSound();
   renderDeckInContainer(shuffledDeck, shuffledContainer);
-  setTimeout(() => {playApplause(); }, APPLAUSE_DELAY); 
+  setTimeout(() => {playApplause(); }, APPlAUSE_DELAY);
+  setTimeout(() => {playStartupSound();}, 5000); 
 };
 
 function playShuffleSound() {
-    var audio = new Audio('sounds/shuffling.mp3');
+    var audio = new Audio('https://raw.githubusercontent.com/StuK359/WarPlus/sounds/shuffling.mp3');
     audio.loop = false;
     audio.play(); 
 };
 
 function playApplause() {
-  var audio2 = new Audio('sounds/player2cheer.mp3');
+  var audio2 = new Audio('https://raw.githubusercontent.com/StuK359/WarPlus/sounds/player2cheer.mp3');
+// var audio2 = new Audio('sounds/player2cheer.mp3');
   audio2.loop = false;
   audio2.play(); 
 };
 
 // Old approach, didn't work.
-// function playStartupSound() {
-//   var audio3 = new Audio('sounds/launchswell0.mp3');
-//   audio3.loop = false;
-//   audio3.play(); 
-// };
+function playStartupSound() {
+   var audio3 = new Audio('https://raw.githubusercontent.com/StuK359/WarPlus/sounds/launchswell0.mp3');
+   audio3.loop = false;
+   audio3.play(); 
+};
 
 function renderDeckInContainer(deck, container) {
   container.innerHTML = '';

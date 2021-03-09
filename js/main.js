@@ -36,6 +36,10 @@ function shuffleDeck() {
     console.log("\nCards shuffled.");
 };
 
+function splitDeck() {
+    console.log("\nCard deck has been split into two randomized stacks of cards, called Ammo Piles.")
+};
+
 function showPayer1AmmoPile() {
     console.log("\nPlayer 1's Ammo Pile Visible.");
 };

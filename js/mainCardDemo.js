@@ -28,6 +28,7 @@ document.querySelector('button').addEventListener('loadstart', playStartupSound)
 
 function renderShuffledDeck() {
   // Create a copy of the masterDeck (leave masterDeck untouched!)
+  
   const tempDeck = [...masterDeck];
   shuffledDeck = [];
   while (tempDeck.length) {
@@ -52,6 +53,7 @@ function renderShuffledDeck() {
   setTimeout(() => {playCowbellSound(); }, 18000);
   setTimeout(() => {playCowbellSound(); }, 19000);
   setTimeout(() => {playCowbellSound(); }, 20000);
+  setTimeout(() => {playWarPlusThemeSong(); }, 21000);
   
   /* Player 1 wins first round */
   setTimeout(() => {playPlayer1CardFaceUp(); }, 22000);
@@ -123,6 +125,15 @@ function buildMasterDeck() {
 }
 
 /* Sound functions */
+
+function playWarPlusThemeSong() {
+  var audioThemeSong = new Audio('sounds/warplusthemesong.mp3');
+  audioThemeSong.loop = false;
+  audioThemeSong.volume = .35;
+  audioThemeSong.play(); 
+};
+
+
 function playShuffleSound() {
   var audio1 = new Audio('sounds/shuffling.mp3');
   audio1.loop = false;

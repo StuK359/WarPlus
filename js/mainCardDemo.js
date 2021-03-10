@@ -91,7 +91,7 @@ function renderShuffledDeck() {
   setTimeout(() => {playClearTheBoardSound(); }, 48000);
   setTimeout(() => {goHome(); }, 50000);
   setTimeout(() => {playSoSadSound(); }, 52000);
-  setTimeout(() => {playQuitSound(); }, 54000);
+  setTimeout(() => {playQuitSound(); }, 56000);
 };
 
 

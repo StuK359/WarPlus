@@ -89,6 +89,7 @@ function renderShuffledDeck() {
   setTimeout(() => {moveCardsToPlayer1WinPile(); }, 44000);
   setTimeout(() => {player1WinsTheGame(); }, 46000)
   setTimeout(() => {playClearTheBoardSound(); }, 48000);
+  setTimeout(() => {goHome(); }, 50000);
   setTimeout(() => {playSoSadSound(); }, 52000);
   setTimeout(() => {playQuitSound(); }, 54000);
 };
@@ -293,4 +294,9 @@ function movePlayer2WinPileToAmmoPile() {
 
 function player1WinsTheGame() {
   console.log("\nPlayer 1 has WON THE GAME!!!!! <<imagine this part flashing n stuff...>>");
-}
+};
+
+function goHome() {
+  console.log("\nThat's it. It's over. Go home.");
+};
+

@@ -190,6 +190,12 @@ function playClearTheBoardSound() {
   audioSwish2Sound.play(); 
  };
 
+ function playTaDaSound() {
+    var audioTaDaSound = new Audio('sounds/tada.mp3');
+    audioTaDaSound.loop = false;
+    audioTaDaSound.play();
+ }
+ 
  function playSoSadSound() {
   var audioSoSadSound = new Audio('sounds/toobad.mp3');
   audioSoSadSound.loop = false;
@@ -293,10 +299,12 @@ function movePlayer2WinPileToAmmoPile() {
 };
 
 function player1WinsTheGame() {
+  playTaDaSound();
   console.log("\nPlayer 1 has WON THE GAME!!!!! <<imagine this part flashing n stuff...>>");
 };
 
 function goHome() {
   console.log("\nThat's it. It's over. Go home.");
 };
+
 

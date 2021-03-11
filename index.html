@@ -6,14 +6,40 @@
     <title>Cards Demo, Audible</title>
     <link href="css/card-deck-css/css/cardstarter.css" rel="stylesheet" />
     <link href="css/main.css" rel="stylesheet" />
-    <script defer src="js/mainCardDemo.js"></script>
+    <script defer src="js/mainWarPlus.js"></script>
     <!-- <script defer src="js/mainresetscript.js"></script> -->
+    <style>
+      html { 
+        background: url(imgs/warplus-background2.jpg) no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
+      .hide {
+       display: none;
+      }
+      .demo-button:hover + .hide {
+       display: block;
+       text-align: center;
+       font-size: large;
+       color: white;
+      }
+    </style>
   </head>
   <body>
-    <h3>Master Deck</h3>
+    <div style="clear: both">
+      <h2 style="float: left" id="player1-label">Player 1</h2>
+      <h2 style="float: right" id="player2-label">Player 2</h2>
+  </div>
+  <hr />
+    <!-- <h2 id="player1" style="text-align:left">Computer Player ("Player 1")</h2> -->
+      <div class="demo-button"id="demo-button"><button class="demo-button">  Demo  </button></div>
+      <div class="hide">Open console to view functions without graphics yet.</div>
+      <div id="player1-profile"><img src="imgs/Player1Profile.jpg" width="15%" align="left"></div>
      <section id="master-deck-container" class="card-container"></section>
-        <button>RE-SHUFFLE DECK</button>
-    <h3>Shuffled Deck</h3>
-    <section id="shuffled-deck-container" class="card-container"></section>
+    <div id="player1-profile"><img src="imgs/Player2Profile.jpg" width="15%" align="right"></div>    
+    <!-- <h2 id="player2" style="text-align:right">Human Player ("Player 2")</h2> -->
+    <section id="shuffled-deck-container" class="card-container"></section></span>
   </body>
 </html>

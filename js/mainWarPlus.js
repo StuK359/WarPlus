@@ -5,47 +5,49 @@ const SOUND_DELAY = 3000;
 const APPLAUSE_DELAY = 1500;
 const DEFAULT_DELAY = 1000;
 
+/*------ sounds ------*/
+const audioShuffle = new Audio('sounds/shuffling.mp3');
+const audioCheer = new Audio('sounds/cheer.mp3');
+const audioPlayer1ProfileShown = new Audio('sounds/launchswell0.mp3');
+const audioPlayer2ProfileShown = new Audio('sounds/launchswell1.mp3');
+const audioTeleportCard = new Audio('sounds/teleportcard.mp3');
+const audioPlayer1Wins = new Audio('sounds/swish1.mp3');
+const audioPlayer2Wins = new Audio('sounds/swish2.mp3');
+const audioTaDa = new Audio('sounds/tada.mp3');
+const audioWarPlusThemeSong = new Audio('sounds/warplusthemesong.mp3');
+audioWarPlusThemeSong.volume = .2;
+const audioClearTheBoard = new Audio('sounds/cleartheboard.mp3');
+const audioCowbell = new Audio('sounds/cowbell.mp3');
+const audioEnthusiasticApplause = new Audio('sounds/enthusiastic-cheer.mp3');
+const audioQuit = new Audio('sounds/quit.mp3');
+const audioStartGame = new Audio('sounds/startgame.mp3');
+const audioSoSad = new Audio('sounds/toobad.mp3');
+const audioShiftTieCardsOver = new Audio('sounds/swish2.mp3');
+
 // Build a 'master' deck of 'card' objects used to create shuffled decks
 const masterDeck = buildMasterDeck();
-renderDeckInContainer(masterDeck, document.getElementById('master-deck-container'));
+// renderDeckInContainer(masterDeck, document.getElementById('master-deck-container'));
 
 /*----- app's state (variables) -----*/
-/* localStorage variables: */
-/* FirstLaunchDemoMode (true | false) */
-
 let shuffledDeck;
-
-const  gameState, winner, roundScore, gameScore;
-// const Player1AmmoStack; Player2AmmoStack, Player1WinStack, Player2WinStack, TieCardsStack;
-
 
 /*----- cached element references -----*/
 const shuffledContainer = document.getElementById('shuffled-deck-container');
 const startupSoundTrigger = document.getElementById('master-deck-container');
 
 /*----- event listeners -----*/
-/* How To Play button */
-/* Start Game button */
-/* Restart Game button */
-/* Quit button */
-/* Player1 Profile Pic clicked */
-/* Player 2 Profile Pic clicked */
-/* Player 1 AmmoPile click */
-/* Stretch goals: */
-/* Obstinate "Play Music" checkbox */
-/* Obstinate "How To Play" button */
+document.getElementById('demo-button').addEventListener('click', renderShuffledDeck);
+//document.getElementById('demo-button').addEventListener('hover', renderShuffledDeck);
 
-document.querySelector('button').addEventListener('click', renderShuffledDeck);
-// document.querySelector('startupSoundTrigger').addEventListener('load', playStartupSound);
-document.querySelector('button').addEventListener('loadstart', playStartupSound);
 
 /*----- functions -----*/
-// function mySleep(ms) {
-//    return new Promise(resolve => setTimeout(resolve, ms || DEFAULT_DELAY));
+// function sleep(ms) {
+//   return new Promise(resolve => setTimeout(resolve, ms || DEFAULT_DELAY));
 // };
 
 function renderShuffledDeck() {
   // Create a copy of the masterDeck (leave masterDeck untouched!)
+  
   const tempDeck = [...masterDeck];
   shuffledDeck = [];
   while (tempDeck.length) {
@@ -53,29 +55,53 @@ function renderShuffledDeck() {
     const rndIdx = Math.floor(Math.random() * tempDeck.length);
     // Note the [0] after splice - this is because splice always returns an array and we just want the card object in that array
     shuffledDeck.push(tempDeck.splice(rndIdx, 1)[0]);
+    audioShuffle.play();
   }
-  playShuffleSound();
-  renderDeckInContainer(shuffledDeck, shuffledContainer);
-  setTimeout(() => {playApplause(); }, APPLAUSE_DELAY);
-//  setTimeout(() => {playStartupSound();}, 5000); 
-};
+  
+ // shuffleDeck();
+//  renderDeckInContainer(shuffledDeck, shuffledContainer);
 
-function playShuffleSound() {
-    var audio2 = new Audio('sounds/shuffling.mp3');
-    audio2.loop = false;
-    audio2.play(); 
-};
+  setTimeout(() => {initializeGame(); }, 3000);
+  setTimeout(() => {renderGame(); }, 4000);
+  setTimeout(() => {splitDeck(); }, 5000);
+  setTimeout(() => {audioWarPlusThemeSong.play(); }, 6000);
+  setTimeout(() => {showPlayer1ProfilePic(); }, 8000);
+  setTimeout(() => {showPlayer2ProfilePic(); }, 9000);
+  setTimeout(() => {audioEnthusiasticApplause.play(); }, 10000);
+    
+  /* Player 1 wins first round */
+  setTimeout(() => {transitionPlayer1CardToBattlefield(); }, 13000);
+  setTimeout(() => {transitionPlayer2CardToBattlefield(); }, 14000);
+  
+  setTimeout(() => {compareCards(); }, 15000);
+  setTimeout(() => {Player1WinsSkirmish(); }, 16000);
+  
+  
+  /* Next round... it's a tie! */
+  setTimeout(() => {transitionPlayer1CardToBattlefield(); }, 17000);
+  setTimeout(() => {transitionPlayer2CardToBattlefield(); }, 20000);
+  setTimeout(() => {compareCards(); },  20000);
+  setTimeout(() => {moveTieCardsAside(); }, 21000);
+  setTimeout(() => {playPlayer1CardFaceDown(); }, 21000);
+  setTimeout(() => {playPlayer2CardFaceDown(); }, 23000);
 
-function playApplause() {
-  var audio = new Audio('sounds/player2cheer.mp3');
-  audio.loop = false;
-  audio.play(); 
-};
+  setTimeout(() => {transitionPlayer1CardToBattlefield(); }, 24000);
+  setTimeout(() => {transitionPlayer2CardToBattlefield(); }, 25000);
+  setTimeout(() => {Player2WinsSkirmish(); }, 25000);
+  setTimeout(() => {Player2WinsBattle(); }, 26000);
 
-function playStartupSound() {
-   var audioStartup = new Audio('sounds/launchswell0.mp3');
-   audioStartup.loop = false;
-   audioStartup.play(); 
+  /* Player 1 wins again! */
+  setTimeout(() => {transitionPlayer1CardToBattlefield(); }, 28000);
+  setTimeout(() => {transitionPlayer2CardToBattlefield(); }, 29000);
+  setTimeout(() => {compareCards(); }, 30000);
+  setTimeout(() => {Player1WinsSkirmish(); }, 31000);
+  setTimeout(() => {hidePlayer2ActivePile(); }, 33000);
+  setTimeout(() => {player1WinsGame(); }, 35000)
+  setTimeout(() => {player2WinsGame(); }, 36000)
+  setTimeout(() => {audioClearTheBoard.play(); }, 38000);
+  setTimeout(() => {goHome(); }, 43000);
+  setTimeout(() => {audioSoSad.play(); }, 43000);
+  setTimeout(() => {audioQuit.play(); }, 46000);
 };
 
 function renderDeckInContainer(deck, container) {
@@ -104,100 +130,145 @@ function buildMasterDeck() {
   return deck;
 }
 
-// function initializeGame() {
-//    console.log("\nGame Initialized.");
-// };
+/*----- Game Functions -----*/
+function initializeGame() {
+   console.log("\nGame Initialized.");
+};
 
-// renderGame(); {
-//    console.log("\nGame Rendered. ");
-// };
+function renderGame() {
+  audioStartGame.play();
+  console.log("\nGame Rendered.");
+};
 
 // function shuffleDeck() {
-//     console.log("\nCards shuffled.");
+//   audioShuffle.play();
+//   console.log("\nCards shuffled.");
 // };
 
-// function splitDeck() {
-//     console.log("\nCard deck has been split into two randomized stacks of cards, called Ammo Piles.")
-// };
+function splitDeck() {
+   console.log("\nCard deck has been split into two randomized stacks of cards, called ActivePiles.")
+};
 
-// function showPayer1AmmoPile() {
-//     console.log("\nPlayer 1's Ammo Pile Visible.");
-// };
+function showPlayer1ProfilePic() {
+  audioPlayer1ProfileShown.play(); 
+  console.log("\nPlayer 1's Profile Picture is visible.");
+};
 
-// function hidePlayer1AmmoPile() {
-//     console.log("\nPlayer 1's Ammo Pile Hidden. ");
-// };
+function showPlayer2ProfilePic() {
+  audioPlayer2ProfileShown.play();
+  console.log("\nPlayer 2's Profile Picture is Visible.");
+};
 
-// function showPlayer2AmmoPile() {
-//     console.log("\nPlayer 2's Ammp Pile Visible. ");
-// };
+/*----- Start of Game -----*/
+function showPlayer1ActivePile() {
+    console.log("\nPlayer 1's ActivePile is Visible.");
+};
 
-// function hidePlayer2AmmoPile() {
-//     console.log("\nPlayer 2's Ammo Pile Hidden. ");
-// };
+function showPlayer2ActivePile() {
+   console.log("\nPlayer 2's ActivePile is Visible.");
+};
 
-// function showPlayer1WinPile() {
-//     console.log("\nPlayer 1's Win Pile Visible.");
-// };
+function transitionPlayer1CardToBattlefield() {
+  audioTeleportCard.play();
+  console.log("\nPlayer 1's card teleports onto the field!");
+};
 
+function transitionPlayer2CardToBattlefield() {
+  audioTeleportCard.play();
+  console.log("\nPlayer 2's card teleports onto the field!");
+};
+
+function compareCards() {
+   console.log("\nCards have been compared. \nEither Player 1 or Player 2 won. \nOr it was a tie. ");
+};
+
+/*----- Default Play; No Tie. -----*/
+function Player1WinsSkirmish() {
+  audioPlayer1Wins.play();
+  console.log("\nPlayer 1 Wins Skirmish!");
+};
+function Player2WinsSkirmish() {
+  audioPlayer2Wins.play();
+  console.log("\nPlayer 2 Wins Skirmish!");
+};
+
+function moveTieCardsAside() {
+  audioShiftTieCardsOver.play();
+  console.log("\nTie cards have been slid left to make room for more cards. ");
+};
+
+function playPlayer1CardFaceDown() {
+  audioTeleportCard.play();
+  console.log("\nPlayer 1 teleports a facedown card due to a tie.");
+};
+
+function playPlayer2CardFaceDown() {
+  audioTeleportCard.play(); 
+  console.log("\nPlayer 2 teleports a facedown card due to a tie.");
+};
+
+function Player1WinsBattle() {
+   audioTaDa.play();
+   console.log("\nPlayer 1 Wins the Battle!");
+};
+
+function Player2WinsBattle() {
+  audioTaDa.play();
+  console.log("\nPlayer 2 Wins the Battle!");
+};
+
+
+/*----- When a player runs out of cards -----*/
+function hidePlayer1ActivePile() {
+  audioSoSad.play();
+  console.log("\nPlayer 1's ActivePile is Hidden. He's out of cards!");
+};
+function hidePlayer2ActivePile() {
+  audioSoSad.play();
+  console.log("\nPlayer 2's ActivePile is Hidden. He's out of cards!");
+};
+
+function player1WinsGame() {
+  audioTaDa.play();
+  console.log("\nPlayer 1 has WON THE GAME!!!!! <<imagine this part flashing n stuff...>>");
+};
+
+function player2WinsGame() {
+  audioTaDa.play();
+  console.log("\nNo... wait...\nPlayer 2 has WON THE GAME!!!!! <<imagine different flashing stuff...>>");
+};
+
+function goHome() {
+  console.log("\nThat's it. It's over. Go home.");
+};
+
+/*----- These are now Obsolete. -----*/
+/*
+/*----- When a player runs out of cards -----*/
 // function hidePlayer1WinPile() {
-//     console.log("\nPlayer 1's Win Pile Hidden. ");
+//   console.log("\nPlayer 1's Win Pile is Hidden.");
 // };
-
-// function showPlayer2WinPile() {
-//     console.log("\nPlayer 2's Win Pile Visible. ");
-// };
-
 // function hidePlayer2WinPile() {
-//     console.log("\nPlayer 2's Win Pile Hidden. ");
+//   console.log("\nPlayer 2's Win Pile is Hidden.");
 // };
-
-// function playPlayer1CardFaceUp() {
-//     console.log("\nPlayer 1's next card is face up. ");
+// function showPlayer1WinPile() {
+//    console.log("\nPlayer 1's Win Pile Visible.");
 // };
-
-// function playPlayer2CardFaceUp() {
-//     console.log("Player 2's next card is face up");
+// function showPlayer2WinPile() {
+//    console.log("\nPlayer 2's Win Pile Visible. ");
 // };
-
-// function playPlayer1CardFaceUpFlipAnimation() {
-//     console.log("\nPlayer 1's next card is face up with STYLE!");
-// };
-
-// function playPlayer2CardFaceUpFlipAnimation() {
-//     console.log("\nPlayer 2's next card is face up with STYLE!");
-// };
-
-// function compareCards() {
-//     console.log("\nCards have been compared. Either Player 1 or Player 2 won, or it was a tie. ");
-// };
-
-// function moveTieCardsAside() {
-//     console.log("\nTie cards have been slid left to make room for more cards. ");
-// };
-
-// function playPlayer1CardFaceDown() {
-//     console.log("\nPlayer 1 played a facedown card due to a tie.");
-// };
-
-// function playPlayer2CardFaceDown() {
-//     console.log("\nPlayer 2 played a facedown card due to a tie.");
-// };
-
 // function moveCardsToPlayer1WinPile() {
-//     console.log("\nPlayer 1 won! Moved cards to his Win pile.");
+//   console.log("\nPlayer 1 won! Moved cards to his Win Pile.");
 // };
-
 // function moveCardsToPlayer2WinPile() {
-//     console.log("\nPlayer 2 won! Moved cards to his Win pile. ");
+//   console.log("\nPlayer 2 won! Moved cards to his Win Pile. ");
 // };
-
 // function movePlayer1WinPileToAmmoPile() {
-//     console.log("\nPlayer 1 ran out of cards! Move his Win pile over to his Ammo pile.");
+//   console.log("\nPlayer 1 ran out of cards! Move his Win Pile over to his Active pile.");
 // };
-
 // function movePlayer2WinPileToAmmoPile() {
-//     console.log("\nPlayer 2 ran out of cards! Move his Win pile over to his Ammo pile. ");
+//   console.log("\nPlayer 2 ran out of cards! Move his Win Pile over to his Active pile. ");
 // };
+// */
 
 

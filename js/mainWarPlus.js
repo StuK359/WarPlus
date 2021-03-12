@@ -247,11 +247,12 @@ function goHome() {
 };
 
 function quitGame() {
-  if (confirm("Are You Sure You Want To Quit? (Y/N)")) {
+  if (confirm("Are You Sure You Want To Quit? Choose [OK] or [Cancel]")) {
     audioQuit.play();
  //   sleep(5000) // Sleep for 5 seconds
     close();
-  }
+   }
+   confirm("Yeah... close() used to work, but not any more. \nSorry.");
 }
 
 /*----- These are now Obsolete. -----*/

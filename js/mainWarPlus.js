@@ -2,6 +2,7 @@
 const suits = ['s', 'c', 'd', 'h'];
 const ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
 const DEFAULT_DELAY = 1000;
+const sleep = milliseconds => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, milliseconds);
 
 /*----- Scoreboard values -----*/
 const player1SkirmishWins = 0, player1BattleWins = 0, player1GameWins = 0;
@@ -34,11 +35,12 @@ const masterDeck = buildMasterDeck();
 let shuffledDeck;
 
 /*----- cached element references -----*/
-const shuffledContainer = document.getElementById('shuffled-deck-container');
+const shuffledContainer = document.getElementById('battlefield');
 const startupSoundTrigger = document.getElementById('master-deck-container');
 
 /*----- event listeners -----*/
 document.getElementById('demo-button').addEventListener('click', renderShuffledDeck);
+document.getElementById('quit-button').addEventListener('click', quitGame);
 //document.getElementById('demo-button').addEventListener('hover', renderShuffledDeck);
 
 
@@ -243,6 +245,14 @@ function player2WinsGame() {
 function goHome() {
   console.log("\nThat's it. It's over. Go home.");
 };
+
+function quitGame() {
+  if (confirm("Are You Sure You Want To Quit? (Y/N)")) {
+    audioQuit.play();
+ //   sleep(5000) // Sleep for 5 seconds
+    close();
+  }
+}
 
 /*----- These are now Obsolete. -----*/
 /*

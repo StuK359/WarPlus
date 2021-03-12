@@ -16,34 +16,24 @@
         -o-background-size: cover;
         background-size: cover;
       }
-      .hide {
-       display: none;
-      }
-      .demo-button:hover + .hide {
-       display: block;
-       text-align: center;
-       font-size: large;
-       color: white;
-      }
     </style>
   </head>
   <body>
     <div style="clear: both">
       <h2 style="float: left" id="player1-label">Player 1</h2>
       <h2 style="float: right" id="player2-label">Player 2</h2>
-  </div>
-  <hr />
-    <!-- <h2 id="player1" style="text-align:left">Computer Player ("Player 1")</h2> -->
-    <div class="demo-button"id="demo-button"><button class="demo-button">  Demo  </button></div>
-    <div class="hide">Open console to view functions without graphics yet.</div>
+  <section class="upper-section"></div>
+    <div><button id="demo-button" class="demo-button">  Demo  </button></div>
+    <div class="demo-msg-hide">Open console to view functions without graphics yet.</div>
+    <div id="quit-button"><button class="quit-button">  Quit  </button></div>
     <div class="profile-pic" id="player1-profile"><img src="imgs/Player1Profile.jpg" width="18%" align="left"></div>
     <div class="profile-pic" id="player2-profile"><img src="imgs/Player2Profile.jpg" width="18%" align="right"></div>
     <div class="scoreboard" style="align-content: center">              -~[ Scoreboard ]~- </div>
     <div class="scoreboard" style="align-content: center">             [ Player 1 Wins: ] 2 Skirmishes, 1 Battle, 1 Game</div>
-    <div class="scoreboard" style="align-content: center">             [ Player 2 Wins: ] 8 Skirmishes, 3 Battles, 2 Games</div>
+    <div class="scoreboard" style="align-content: center">             [ Player 2 Wins: ] 8 Skirmishes, 3 Battles, 2 Games</div><upper-section></section>
     <section id="master-deck-container" class="card-container"></section>
     
     <!-- <h2 id="player2" style="text-align:right">Human Player ("Player 2")</h2> -->
-    <section id="shuffled-deck-container" class="card-container"></section>
+    <section id="battlefield" class="card-container"></section>
   </body>
 </html>

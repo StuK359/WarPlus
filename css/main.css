@@ -37,3 +37,20 @@ html, * {
     padding: 0;
     display: inline;
   }
+
+  .scoreboard {
+    color: chartreuse;
+    font-size: 28px;
+  }
+
+ #player1-profile {
+    border-radius: 50%;
+ }
+
+ #player2-profile {
+  border-radius: 50%;
+}
+
+img {
+  border-radius: 50%;
+}

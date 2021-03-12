@@ -1,9 +1,11 @@
 /*----- constants -----*/
 const suits = ['s', 'c', 'd', 'h'];
 const ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
-const SOUND_DELAY = 3000;
-const APPLAUSE_DELAY = 1500;
 const DEFAULT_DELAY = 1000;
+
+/*----- Scoreboard values -----*/
+const player1SkirmishWins = 0, player1BattleWins = 0, player1GameWins = 0;
+const player2SkirmishWins = 0, player2BattleWins = 0, player2GameWins = 0;
 
 /*------ sounds ------*/
 const audioShuffle = new Audio('sounds/shuffling.mp3');

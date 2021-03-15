@@ -6,51 +6,181 @@ html, * {
     height: 100%;
   }
   
-
-  .card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
- /*   border: 5px whitesmoke;  */
- /*    border: 4px dotted grey; */
-  }
-  
-  button {
-    display: block;
-    margin: 10px auto;
-    padding: 10px;
-    font-size: 16px;
-    color: grey;
-    border: 2px solid grey;
-    border-radius: 5px;
-    outline: none;
-  }
-  
-  button:hover {
-    background-color: lightblue;
-    color: white;
-  }
-
-  h2 {
-    color: white;
-    margin: 0 100px 0 80px;
-    padding: 0;
-    display: inline;
-  }
-
-  .scoreboard {
-    color: chartreuse;
-    font-size: 28px;
-  }
-
- #player1-profile {
-    border-radius: 50%;
+ h1 {
+  display:flex;
+  justify-content:center;
+  align-content:flex-end;
+  color:white;
+  font-size: 30px;
  }
 
- #player2-profile {
-  border-radius: 50%;
+h2 {
+  color: white;
+  margin: 0 100px 0 80px;
+  padding: 0;
+  display: inline;
+} 
+
+.gameboard {
+    display: grid;
+    /* height: fit-content; */
+    /* color: aliceblue; */
+    grid-template-rows: 10% 10% 10% 20% 20% 20%;
+    grid-template-columns:  1fr 1fr 1fr 1fr;
+    font-size: large;
+    /* grid-gap:1em; */
+    justify-content:space-around;
+    align-items: flex-start;
+  }
+
+  .gameboard > div {
+    /* padding: 1px; */
+    /* background: rgba(0,0,0,0); */
+    /* background-color: antiquewhite; */
+    color:antiquewhite;
+    padding:5em;
+    font-size: medium;
+    /* border: 1px;
+    border-style: dashed; */
+    /* grid-auto-rows: minmax(50px, auto); */
+ }
+  
+  
+.game-msgs {
+  justify-content: flex-start;
+  align-content: center;
+  grid-column: 1/4;
+  font-size: xx-large;
 }
 
-img {
-  border-radius: 50%;
+button {
+  display: block;
+  margin: 0 20px;
+  padding: 10px;
+  font-size: x-large;
+  color: grey;
+  border: 2px solid grey;
+  border-radius: 4%;
 }
+  
+button:hover {
+  border-width: 3px;
+  font-size: xx-large;
+  font-weight: bolder;
+  background-color: darkgreen;
+  color: white;
+}
+
+.sb-title {
+    justify-content: center;
+    align-content: center;
+    padding: 25%;
+    font-size: x-large;
+    grid-column: 2/4;
+}
+
+.scoreboard > div {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 2fr 2fr 2fr 2fr;
+  grid-column: 2/4;
+  grid-row: 3/5;
+}
+
+.p1-pic > img {
+  border-radius: 50%;
+  min-height: fit-content;
+  justify-content: flex-start;
+  grid-column: 1;
+  grid-row: 4/8;
+  border: 1px solid white;
+}
+
+.p2-pic > img {
+  border-radius: 50%;
+  min-height: fit-content;
+  justify-content: flex-end;
+  grid-column: 4;
+  grid-row: 4/8;
+  border: 1px solid white;
+}
+
+/*.card {
+  background: local;
+  background-color: antiquewhite;
+  border: 1px dashed rgba(250,235,215,1);
+  border-radius: 4%;
+} */
+
+.p1-stack {
+    justify-self: center;
+    align-self: center;
+    grid-column: 1;
+    grid-row: 7;
+    /* background: local; */
+    background-color: antiquewhite;
+    border: 1px dashed rgba(250,235,215,1);
+    border-radius: 4%;
+}
+
+.p2-stack {
+  justify-self: center;
+  align-self: center;
+  grid-column: 4;
+  grid-row: 7;
+  background: local;
+  background-color: antiquewhite;
+  border: 1px dashed rgba(250,235,215,1);
+  border-radius: 4%; 
+}
+
+.p1-tie-cards {
+  justify-self: center;
+  align-self: center;
+  grid-column: 1;
+  grid-row: 8;
+  background: local;
+  background-color: antiquewhite;
+  border: 1px dashed rgba(250,235,215,1);
+  border-radius: 4%; 
+}
+
+.p1-active-card {
+  justify-self: center;
+  align-self: center;
+  grid-column: 2;
+  grid-row: 8;
+  background: local;
+  background-color: antiquewhite;
+  border: 1px dashed rgba(0,0,0,0);
+  border-radius: 4%; 
+}
+
+.p2-active-card {
+justify-self: center;
+align-self: center;
+grid-column: 3;
+grid-row:  8;
+background: local;
+background-color: antiquewhite;
+border: 1px dashed rgba(250,235,215,1);
+border-radius: 4%;
+}
+
+.p0-captive-cards {
+  justify-self: center;
+  align-self: center;
+  grid-column: 4;
+  grid-row: 8;
+  background: local;
+  background-color: antiquewhite;
+  border: 1px dashed rgba(250,235,215,1);
+  border-radius: 4%;
+}
+
+/* .card {
+  background: local;
+  background-color: antiquewhite;
+  border: 1px dashed rgba(250,235,215,1);
+  border-radius: 4%;
+} */
+

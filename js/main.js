@@ -2,7 +2,18 @@
 const suits = ['s', 'c', 'd', 'h'];
 const ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
 const DEFAULT_DELAY = 1000;
+
+/*----- Useful Utility stuff -----*/
+
+/*----- Occasionally useful, but only use on a worker thread, not the main thread. -----*/
 const sleep = milliseconds => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, milliseconds);
+
+
+/*----- Example of a custom event -----*/
+const eventDemo = new Event('eventDemo');
+
+
+
 
 /*----- Scoreboard values -----*/
 const player1SkirmishWins = 0, player1BattleWins = 0, player1GameWins = 0;
@@ -39,9 +50,11 @@ const shuffledContainer = document.getElementById('battlefield');
 const startupSoundTrigger = document.getElementById('master-deck-container');
 
 /*----- event listeners -----*/
-document.getElementById('demo-button').addEventListener('click', renderShuffledDeck);
+// document.getElementById('demo-button').addEventListener('click', renderShuffledDeck);
 document.getElementById('quit-button').addEventListener('click', quitGame);
-//document.getElementById('demo-button').addEventListener('hover', renderShuffledDeck);
+
+/*----- Adding listener for the "Demo" custom event -----*/
+document.getElementById('demo-button').addEventListener('eventDemo', renderShuffledDeck);
 
 
 /*----- functions -----*/
@@ -255,33 +268,14 @@ function quitGame() {
    confirm("Yeah... close() used to work, but not any more. \nSorry.");
 }
 
-/*----- These are now Obsolete. -----*/
-/*
-/*----- When a player runs out of cards -----*/
-// function hidePlayer1WinPile() {
-//   console.log("\nPlayer 1's Win Pile is Hidden.");
-// };
-// function hidePlayer2WinPile() {
-//   console.log("\nPlayer 2's Win Pile is Hidden.");
-// };
-// function showPlayer1WinPile() {
-//    console.log("\nPlayer 1's Win Pile Visible.");
-// };
-// function showPlayer2WinPile() {
-//    console.log("\nPlayer 2's Win Pile Visible. ");
-// };
-// function moveCardsToPlayer1WinPile() {
-//   console.log("\nPlayer 1 won! Moved cards to his Win Pile.");
-// };
-// function moveCardsToPlayer2WinPile() {
-//   console.log("\nPlayer 2 won! Moved cards to his Win Pile. ");
-// };
-// function movePlayer1WinPileToAmmoPile() {
-//   console.log("\nPlayer 1 ran out of cards! Move his Win Pile over to his Active pile.");
-// };
-// function movePlayer2WinPileToAmmoPile() {
-//   console.log("\nPlayer 2 ran out of cards! Move his Win Pile over to his Active pile. ");
-// };
-// */
+function triggerPlayDemoEvent() {
+  document.getElementById('demo-button').dispatchEvent(eventDemo);
+//  audioCowbell.play(); /* Optional auto-Demo noise */
+}
+
+/*----- For Automated Demo replays using custom "eventDemo" event. -----*/
+/*--- setTimeout(() => {triggerPlayDemoEvent(); }, 5000); */
+
+
 
 

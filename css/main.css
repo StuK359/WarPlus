@@ -4,7 +4,12 @@ html, * {
   
   html, body {
     height: 100%;
-    background-color: green;
+    background-image: url("imgs/warplus-background.jpg") no-reeat center center fixed; 
+    /* -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover; */
+    background-size: cover;
+    /* background-color: green; */
   }
   
  h1 {

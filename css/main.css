@@ -4,6 +4,7 @@ html, * {
   
   html, body {
     height: 100%;
+    background-color: green;
   }
   
  h1 {
@@ -31,6 +32,7 @@ h2 {
     /* grid-gap:1em; */
     justify-content:space-around;
     align-items: flex-start;
+    background: green;
   }
 
   .gameboard > div {
